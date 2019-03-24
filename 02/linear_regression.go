@@ -100,4 +100,5 @@ func main() {
 	weight := train(X, Y, 10000, .01)
 
 	fmt.Printf("\nw=%.3f\n", weight)
+	fmt.Printf("Prediction: x=%d => y=%.2f\n", 20, 20.0*weight)
 }
