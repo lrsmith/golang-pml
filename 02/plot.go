@@ -32,8 +32,8 @@ func readData(file string) plotter.XYs {
 			continue
 		}
 		fields := strings.Fields(line)
-		points[index].X, _ = strconv.ParseFloat(fields[0], 64)
-		points[index].Y, _ = strconv.ParseFloat(fields[1], 64)
+		points[index-1].X, _ = strconv.ParseFloat(fields[0], 64)
+		points[index-1].Y, _ = strconv.ParseFloat(fields[1], 64)
 
 	}
 
@@ -64,7 +64,7 @@ func main() {
 	plot.Add(scatter)
 
 	// Save the plot to a PNG file.
-	if err := plot.Save(4*vg.Inch, 4*vg.Inch, "graphs/02_points.png"); err != nil {
+	if err := plot.Save(4*vg.Inch, 4*vg.Inch, "graphs/plot.png"); err != nil {
 		panic(err)
 	}
 
