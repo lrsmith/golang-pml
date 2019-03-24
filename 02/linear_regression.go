@@ -10,8 +10,8 @@ import (
 	"gonum.org/v1/gonum/mat"
 )
 
-func matPrint(X mat.Matrix) {
-	fa := mat.Formatted(X, mat.Prefix(""), mat.Squeeze())
+func vecPrint(vector mat.Matrix) {
+	fa := mat.Formatted(vector.T(), mat.Prefix(""), mat.Squeeze())
 	fmt.Printf("%v\n", fa)
 }
 
@@ -48,24 +48,56 @@ func import_data(file string) (*mat.VecDense, *mat.VecDense) {
 	return X, Y
 }
 
-func train(X []float64, Y []float64, iterations int, lr int) int {
+func predict(xVector *mat.VecDense, weight float64) *mat.VecDense {
 
-	var w int
-	return w
+	tmpVector := mat.NewVecDense(xVector.Len(), nil)
+	tmpVector.ScaleVec(weight, xVector)
+
+	// vecPrint(xVector)
+	// vecPrint(tmpVector)
+
+	return tmpVector
 }
 
-func predict(X []float64, w int) {
+func loss(xVector *mat.VecDense, yVector *mat.VecDense, weight float64) float64 {
 
-	return // X* w
+	tmpVector := predict(xVector, weight)
+	tmpVector.SubVec(tmpVector, yVector)       // vecPrint(tmpVector)
+	tmpVector.MulElemVec(tmpVector, tmpVector) // vecPrint(tmpVector)
+
+	sum := 0.0
+
+	for i := 0; i < tmpVector.Len(); i++ {
+		sum += tmpVector.AtVec(i)
+		//fmt.Println(sum)
+	}
+
+	return sum / float64(tmpVector.Len())
 }
 
-func loss(X []float64, Y []float64, iterations int, lr int) {
-	return
+func train(xVector *mat.VecDense, yVector *mat.VecDense, iterations int, learningRate float64) float64 {
+
+	weight := 0.0
+	for i := 0; i < iterations; i++ {
+		currentLoss := loss(xVector, yVector, weight)
+		fmt.Printf("Iteration %4d => Loss: %.6f\n", i, currentLoss)
+
+		if loss(xVector, yVector, weight+learningRate) < currentLoss {
+			weight += learningRate
+		} else if loss(xVector, yVector, weight-learningRate) < currentLoss {
+			weight -= learningRate
+		} else {
+			return weight
+		}
+	}
+	log.Fatal("Couldn't Converge")
+	return -1
 }
 
 func main() {
 
 	X, Y := import_data("data/pizza.txt")
-	matPrint(X)
-	matPrint(Y)
+	weight := train(X, Y, 10000, .01)
+
+	fmt.Printf("\nw=%.3f\n", weight)
 }
