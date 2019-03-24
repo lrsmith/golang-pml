@@ -39,7 +39,17 @@ func import_data(file string) ([]float64, []float64) {
 
 func train(X []float64, Y []float64, iterations int, lr int) int {
 
-	return 0
+	var w int
+	return w
+}
+
+func predict(X []float64, w int) {
+
+	return // X* w
+}
+
+func loss(X []float64, Y []float64, iterations int, lr int) {
+	return
 }
 
 func main() {
