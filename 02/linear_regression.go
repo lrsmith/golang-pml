@@ -6,9 +6,16 @@ import (
 	"log"
 	"strconv"
 	"strings"
+
+	"gonum.org/v1/gonum/mat"
 )
 
-func import_data(file string) ([]float64, []float64) {
+func matPrint(X mat.Matrix) {
+	fa := mat.Formatted(X, mat.Prefix(""), mat.Squeeze())
+	fmt.Printf("%v\n", fa)
+}
+
+func import_data(file string) (*mat.VecDense, *mat.VecDense) {
 
 	fh, err := ioutil.ReadFile(file)
 	if err != nil {
@@ -16,8 +23,8 @@ func import_data(file string) ([]float64, []float64) {
 	}
 	lines := strings.Split(string(fh), "\n")
 
-	X := make([]float64, len(lines)-1)
-	Y := make([]float64, len(lines)-1)
+	X := mat.NewVecDense(len(lines)-1, nil)
+	Y := mat.NewVecDense(len(lines)-1, nil)
 
 	for index, line := range lines {
 		// Skip header
@@ -29,8 +36,12 @@ func import_data(file string) ([]float64, []float64) {
 			continue
 		}
 		fields := strings.Fields(line)
-		X[index-1], _ = strconv.ParseFloat(fields[0], 64)
-		Y[index-1], _ = strconv.ParseFloat(fields[1], 64)
+
+		x, _ := strconv.ParseFloat(fields[0], 64)
+		y, _ := strconv.ParseFloat(fields[1], 64)
+
+		X.SetVec(index-1, x)
+		Y.SetVec(index-1, y)
 
 	}
 
@@ -55,6 +66,6 @@ func loss(X []float64, Y []float64, iterations int, lr int) {
 func main() {
 
 	X, Y := import_data("data/pizza.txt")
-	fmt.Printf("%v\n", X)
-	fmt.Printf("%v\n", Y)
+	matPrint(X)
+	matPrint(Y)
 }
