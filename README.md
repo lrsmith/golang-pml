@@ -1,12 +1,5 @@
 
 
+# Overview
 
-
-# Setup
-
-* mkdir golang-pml ; cd golang-pml
-* go mod init github.com/lrsmith/golang-pml
-
-* mkdir data ; cd data
-* wget http://media.pragprog.com/titles/pplearn/code/02_first/pizza.txt
-
+This my attempt at Golang code for, Pragmatic Programmers [Programming Machine Learning](https://pragprog.com/book/pplearn/programming-machine-learning)  This is an initial iteration as I work through the chapters and examples. I plan on revisiting and refactoring as I become more familiar with Gonum and other libraries.
