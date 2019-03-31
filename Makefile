@@ -13,6 +13,12 @@ plot_linear_regression:
 plot_linear_regression_with_bias:
 	go build -o ./bin/plot_linear_regression_with_bias ./02/plot_linear_regression_with_bias.go
 
+# Chapter 03
+
+gradient_descent_without_bias:
+	go build -o ./bin/gradient_descent_without_bias ./03/gradient_descent_without_bias.go
+
+
 clean:
 	rm ./bin/*
 	rm ./graphs/*
