@@ -18,6 +18,8 @@ plot_linear_regression_with_bias:
 gradient_descent_without_bias:
 	go build -o ./bin/gradient_descent_without_bias ./03/gradient_descent_without_bias.go
 
+gradient_descent_final:
+	go build -o ./bin/gradient_descent_final ./03/gradient_descent_final.go
 
 clean:
 	rm ./bin/*
