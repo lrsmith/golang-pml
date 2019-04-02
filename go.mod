@@ -8,7 +8,7 @@ require (
 	github.com/gonum/internal v0.0.0-20181124074243-f884aa714029 // indirect
 	github.com/gonum/lapack v0.0.0-20181123203213-e4cdc5a0bff9 // indirect
 	github.com/gonum/matrix v0.0.0-20181209220409-c518dec07be9 // indirect
-	github.com/gonum/stat v0.0.0-20181125101827-41a0da705a5b // indirect
+	github.com/gonum/stat v0.0.0-20181125101827-41a0da705a5b
 	gonum.org/v1/gonum v0.0.0-20180816165407-929014505bf4
 	gonum.org/v1/plot v0.0.0-20190312081609-cd8a2043e414
 )

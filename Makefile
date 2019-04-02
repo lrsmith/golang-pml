@@ -1,6 +1,6 @@
 
 linear_regression:
-	go build -o ./bin/linear_regression ./02/linear_regression.go
+	go build -o ./bin/linear_regression ./02/linear_regression/linear_regression.go
 
 linear_regression_with_bias:
 	go build -o ./bin/linear_regression_with_bias ./02/linear_regression_with_bias.go
